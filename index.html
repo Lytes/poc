@@ -63,13 +63,13 @@
 
     function trySign(){
         const message = "Hello";
-        const hexMessage = toHex(message);
 
         const signature = window.AndroidEthereum.signMessage(
-        hexMessage,
-        "personal_sign"
+        message,
+        "eth_sign"
         );
-        log("Sign:\n" + signature);
+
+        console.log("Signature:", signature);
     }
 </script>
 
