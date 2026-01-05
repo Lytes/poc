@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AndroidETH PoC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Ethereum Interface PoC</h2>
+
+<button onclick="getAddress()">Get Address</button>
+<button onclick="getBalance()">Get Balance</button>
+
+<pre id="output">Waiting...</pre>
+
+<script>
+    function log(message) {
+        document.getElementById("output").textContent = message;
+    }
+
+    function getAddress() {
+        try {
+            const address = AndroidEthereum.getAddress();
+            log("Address:\n" + address);
+        } catch (e) {
+            log("Error getting address:\n" + e);
+        }
+    }
+
+    function getBalance() {
+        try {
+            const address = AndroidEthereum.getAddress();
+            const balanceHex = AndroidEthereum.getBalance(address);
+            log(
+                "Address:\n" + address +
+                "\n\nBalance (hex):\n" + balanceHex
+            );
+        } catch (e) {
+            log("Error getting balance:\n" + e);
+        }
+    }
+</script>
+
+</body>
+</html>
