@@ -62,14 +62,28 @@
         }
 
     function trySign(){
-        const message = "Hello";
+        const typedData = {
+        domain: {
+            name: "MyApp",
+            version: "1",
+            chainId: 1
+        },
+        message: {
+            contents: "Hello"
+        },
+        primaryType: "Message",
+        types: {
+            Message: [{ name: "contents", type: "string" }]
+        }
+        };
 
         const signature = window.AndroidEthereum.signMessage(
-        message,
-        "eth_sign"
+        JSON.stringify(typedData),
+        "eth_signTypedData"
         );
 
         console.log("Signature:", signature);
+
     }
 </script>
 
