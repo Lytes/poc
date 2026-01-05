@@ -24,8 +24,7 @@
 <h2>Ethereum Interface PoC</h2>
 
 <button onclick="getAddress()">Get Address</button>
-<button onclick="getBalance()">Get Balance</button>
-<button onclick="trySign()">Sign2</button>
+
 <pre id="output">Waiting...</pre>
 
 <script>
@@ -42,49 +41,7 @@
         }
     }
 
-    function getBalance() {
-        try {
-            const address = AndroidEthereum.getAddress();
-            const balanceHex = AndroidEthereum.getBalance(address);
-            log(
-                "Address:\n" + address +
-                "\n\nBalance (hex):\n" + balanceHex
-            );
-        } catch (e) {
-            log("Error getting balance:\n" + e);
-        }
-    }
 
-    function toHex(str) {
-        return "0x" + Array.from(str)
-            .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
-            .join("");
-        }
-
-    function trySign(){
-        const typedData = {
-        domain: {
-            name: "MyApp",
-            version: "1",
-            chainId: 1
-        },
-        message: {
-            contents: "Hello"
-        },
-        primaryType: "Message",
-        types: {
-            Message: [{ name: "contents", type: "string" }]
-        }
-        };
-
-        const signature = window.AndroidEthereum.signMessage(
-        JSON.stringify(typedData),
-        "eth_signTypedData"
-        );
-
-        console.log("Signature:", signature);
-
-    }
 </script>
 
 </body>
