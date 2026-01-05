@@ -25,7 +25,7 @@
 
 <button onclick="getAddress()">Get Address</button>
 <button onclick="getBalance()">Get Balance</button>
-
+<button onclick="trySign()">Sign</button>
 <pre id="output">Waiting...</pre>
 
 <script>
@@ -53,6 +53,23 @@
         } catch (e) {
             log("Error getting balance:\n" + e);
         }
+    }
+
+    function toHex(str) {
+        return "0x" + Array.from(str)
+            .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
+            .join("");
+        }
+
+    function trySign(){
+        const message = "Hello";
+        const hexMessage = toHex(message);
+
+        const signature = window.AndroidEthereum.signMessage(
+        hexMessage,
+        "personal_sign"
+        );
+        log("Sign:\n" + signature);
     }
 </script>
 
